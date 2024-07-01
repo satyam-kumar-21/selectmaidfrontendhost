@@ -1,4 +1,4 @@
-// UpdateCard.js
+
 import React from 'react';
 
 const UpdateCard = ({ imageUrl, title, description }) => {

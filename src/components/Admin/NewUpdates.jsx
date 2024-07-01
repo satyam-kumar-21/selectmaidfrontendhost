@@ -12,7 +12,7 @@ function NewUpdates() {
   });
   const [isAddingUpdate, setIsAddingUpdate] = useState(false);
 
-  const apiUrl = "https://selectmaidbackendhost-27wu8jxlb-satyam-kumar-21s-projects.vercel.app/"
+  const apiUrl = "https://selectmaidbackendhost-git-main-satyam-kumar-21s-projects.vercel.app"
 
   useEffect(() => {
     const fetchNewUpdates = async () => {
