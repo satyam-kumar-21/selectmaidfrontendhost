@@ -69,13 +69,11 @@ function Gallery() {
       formDataToSend.append('description', formData.description);
       formDataToSend.append('image', formData.image);
 
-      // const response = await axios.post(`${apiUrl}/gallery/upload-gallery`, formDataToSend, {
-      //   headers: {
-      //     'Content-Type': 'multipart/form-data',
-      //   },
-      // });
-
-      const response = await axios.post(`${apiUrl}/gallery/upload-gallery`, formDataToSend);
+      const response = await axios.post(`${apiUrl}/gallery/upload-gallery`, formDataToSend, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
 
       setGalleries([...galleries, response.data]);
       handleCloseAddGallery();
