@@ -78,7 +78,7 @@ function Gallery() {
       setGalleries([...galleries, response.data]);
       handleCloseAddGallery();
     } catch (error) {
-      setError('Error creating new gallery');
+      setError(error.message);
     }
   };
 
