@@ -120,7 +120,7 @@ const Hero = () => {
           </div>
           <div className="w-full lg:w-[40%] flex justify-center lg:justify-end mb-8 lg:mb-0">
             <img
-              src="http://www.de-pest.org/images/pic2.png"
+              src="https://content.jdmagicbox.com/comp/delhi/t9/011pxx11.xx11.220621160256.z9t9/catalogue/s-k-placement-service-centre-ashok-vihar-delhi-placement-services-for-maids-for-employers--zm1wzb9hc7.jpg"
               className="max-w-xs md:max-w-sm"
               alt="Watch Illustration"
             />
