@@ -11,12 +11,10 @@ function Gallery() {
   });
   const [isAddingGallery, setIsAddingGallery] = useState(false);
 
-  const apiUrl = "https://selectmaidbackendhost.vercel.app"
-
   useEffect(() => {
     const fetchGalleries = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/gallery/all-galleries`); // Replace with your actual API endpoint
+        const response = await axios.get('/gallery/all-galleries'); // Relative path
         setGalleries(response.data);
       } catch (error) {
         setError('Error fetching data');
@@ -28,7 +26,7 @@ function Gallery() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${apiUrl}/gallery/delete-gallery/${id}`); // Replace with your actual API endpoint
+      await axios.delete(`/gallery/delete-gallery/${id}`); // Relative path
       setGalleries(galleries.filter(gallery => gallery._id !== id));
     } catch (error) {
       setError('Error deleting gallery item');
@@ -69,7 +67,7 @@ function Gallery() {
       formDataToSend.append('description', formData.description);
       formDataToSend.append('image', formData.image);
 
-      const response = await axios.post(`${apiUrl}/gallery/upload-gallery`, formDataToSend, {
+      const response = await axios.post('/gallery/upload-gallery', formDataToSend, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
