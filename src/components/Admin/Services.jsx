@@ -73,7 +73,7 @@ function Services() {
       formDataToSend.append('image', formData.image);
 
       const response = await axios.post(`${apiUrl}/service/create-service`, formDataToSend, {
-        withCredentials: true, // Send credentials with the request if required by your backend
+        // withCredentials: true, // Send credentials with the request if required by your backend
         headers: {
           'Content-Type': 'multipart/form-data',
         },
