@@ -13,15 +13,15 @@ function Review() {
   });
   const [isAddingRating, setIsAddingRating] = useState(false);
 
-  const apiUrl = "https://selectmaidbackendhost.vercel.app"
+  const apiUrl = "https://selectmaidbackendhost.vercel.app";
 
   useEffect(() => {
     const fetchRatings = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/rating/get-all-ratings`); // Replace with your actual API endpoint
+        const response = await axios.get(`${apiUrl}/rating/get-all-ratings`);
         setRatings(response.data);
       } catch (error) {
-        setError('Error fetching data');
+        setError('Error fetching data: ' + error.message);
       }
     };
 
@@ -30,10 +30,10 @@ function Review() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${apiUrl}/rating/delete-rating/${id}`); // Replace with your actual API endpoint
+      await axios.delete(`${apiUrl}/rating/delete-rating/${id}`);
       setRatings(ratings.filter(rating => rating._id !== id));
     } catch (error) {
-      setError('Error deleting rating');
+      setError('Error deleting rating: ' + error.message);
     }
   };
 
@@ -84,7 +84,7 @@ function Review() {
       setRatings([...ratings, response.data]);
       handleCloseAddRating();
     } catch (error) {
-      setError('Error creating new rating');
+      setError('Error creating new rating: ' + error.message);
     }
   };
 
@@ -106,7 +106,7 @@ function Review() {
                 <p className="text-xl font-bold mb-2 text-white">Rating: {rating.rating}</p>
                 {rating.image && (
                   <img
-                    src={rating.image} // Assuming image is a URL fetched from backend
+                    src={rating.image}
                     alt={rating.name}
                     className="rounded-lg object-cover h-48 w-full mb-4"
                   />

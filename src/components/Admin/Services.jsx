@@ -12,12 +12,12 @@ function Services() {
   });
   const [isAddingService, setIsAddingService] = useState(false);
 
-  const apiUrl = "https://selectmaidbackendhost.vercel.app"
+  const apiUrl = "https://selectmaidbackendhost.vercel.app";
 
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/service/get-all-services`); // Replace with your actual API endpoint
+        const response = await axios.get(`${apiUrl}/service/get-all-services`);
         setServices(response.data);
       } catch (error) {
         setError('Error fetching data');
@@ -29,7 +29,7 @@ function Services() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${apiUrl}/service/delete-service/${id}`); // Replace with your actual API endpoint
+      await axios.delete(`${apiUrl}/service/delete-service/${id}`);
       setServices(services.filter(service => service._id !== id));
     } catch (error) {
       setError('Error deleting service');
@@ -73,6 +73,7 @@ function Services() {
       formDataToSend.append('image', formData.image);
 
       const response = await axios.post(`${apiUrl}/service/create-service`, formDataToSend, {
+        withCredentials: true, // Send credentials with the request if required by your backend
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -102,7 +103,7 @@ function Services() {
                 <p className="text-white mb-2">{service.description}</p>
                 {service.image && (
                   <img
-                    src={service.image} // Assuming image is a URL fetched from backend
+                    src={service.image}
                     alt={service.heading}
                     className="rounded-lg object-cover h-48 w-full mb-4"
                   />

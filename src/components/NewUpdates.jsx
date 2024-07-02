@@ -4,12 +4,12 @@ import UpdateCard from './UpdateCard'; // Adjust the import path based on your p
 
 const NewUpdates = () => {
   const [updates, setUpdates] = useState([]);
-  const apiUrl = "https://selectmaidbackendhost.vercel.app"
+ // const apiUrl = "https://selectmaidbackendhost.vercel.app"
 
   useEffect(() => {
     const fetchUpdates = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/new-update/get-all-new-updates`); // Replace with your backend route
+        const response = await axios.get(`/new-update/get-all-new-updates`); // Replace with your backend route
         if (!response.data) {
           throw new Error('Failed to fetch updates');
         }
