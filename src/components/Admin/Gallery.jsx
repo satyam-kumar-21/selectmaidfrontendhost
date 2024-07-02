@@ -11,7 +11,7 @@ function Gallery() {
   });
   const [isAddingGallery, setIsAddingGallery] = useState(false);
 
-  const apiUrl = "https://selectmaidbackendhost.vercel.app"
+  const apiUrl = "https://selectmaidbackendhost.vercel.app/"
 
   useEffect(() => {
     const fetchGalleries = async () => {
