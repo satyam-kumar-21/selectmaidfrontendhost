@@ -12,7 +12,7 @@ function NewUpdates() {
   });
   const [isAddingUpdate, setIsAddingUpdate] = useState(false);
 
-  const apiUrl = "https://selectmaidbackendhost.vercel.app"
+  //const apiUrl = "https://selectmaidbackendhost.vercel.app"
 
   useEffect(() => {
     const fetchNewUpdates = async () => {
@@ -72,7 +72,7 @@ function NewUpdates() {
       formDataToSend.append('description', formData.description);
       formDataToSend.append('image', formData.image);
 
-      const response = await axios.post(`${apiUrl}/new-update/create-new-update`, formDataToSend, {
+      const response = await axios.post(`/new-update/create-new-update`, formDataToSend, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
