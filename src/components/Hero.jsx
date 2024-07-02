@@ -11,7 +11,6 @@ const Hero = () => {
     setIsMenuOpen(false);
   };
 
-  const heroImg = "../../public/image/hero_maid-removebg.png"
 
   return (
     <main className="dark:bg-gray-800 bg-white relative overflow-hidden h-screen">
@@ -122,7 +121,7 @@ const Hero = () => {
           </div>
           <div className="w-full lg:w-[50%] flex justify-center lg:justify-end mb-8 lg:mb-0 lg:mr-10">
             <img
-              src={heroImg}
+              src="https://res.cloudinary.com/drgktyioo/image/upload/v1719938343/hero_maid-removebg_j2v1wf.png"
               className="max-w-md md:max-w-lg"
               alt="Watch Illustration"
             />
