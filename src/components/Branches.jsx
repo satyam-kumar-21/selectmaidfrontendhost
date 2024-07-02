@@ -4,7 +4,7 @@ import BranchCard from './BranchCard'; // Adjust the import path based on your p
 
 const Branches = () => {
   const [branches, setBranches] = useState([]);
-  const apiUrl = "https://selectmaidbackendhost-git-main-satyam-kumar-21s-projects.vercel.app"
+  const apiUrl = "https://selectmaidbackendhost.vercel.app"
 
   useEffect(() => {
     const fetchBranches = async () => {

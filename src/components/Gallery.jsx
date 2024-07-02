@@ -4,7 +4,7 @@ import GalleryCard from './GalleryCard'; // Adjust the import path based on your
 
 const Gallery = () => {
   const [galleryItems, setGalleryItems] = useState([]);
-  const apiUrl = "https://selectmaidbackendhost-git-main-satyam-kumar-21s-projects.vercel.app"
+  const apiUrl = "https://selectmaidbackendhost.vercel.app"
 
   useEffect(() => {
     const fetchGalleryItems = async () => {

@@ -8,7 +8,7 @@ const AdminLogin = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const apiUrl = "https://selectmaidbackendhost-git-main-satyam-kumar-21s-projects.vercel.app"
+  const apiUrl = "https://selectmaidbackendhost.vercel.app"
 
   const handleSubmit = async (e) => {
     e.preventDefault();

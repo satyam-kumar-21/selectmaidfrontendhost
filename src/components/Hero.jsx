@@ -44,9 +44,6 @@ const Hero = () => {
               <a href="#contact" className="py-2 px-4" onClick={closeMenu}>
                 Contact
               </a>
-              <a href="/admin/login" className="py-2 px-4" onClick={closeMenu}>
-                Admin
-              </a>
             </nav>
             <button
               onClick={toggleMenu}
