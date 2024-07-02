@@ -11,6 +11,8 @@ const Hero = () => {
     setIsMenuOpen(false);
   };
 
+  const heroImg = "../../public/image/hero_maid-removebg.png"
+
   return (
     <main className="dark:bg-gray-800 bg-white relative overflow-hidden h-screen">
       <header className="h-24 sm:h-32 flex items-center z-30 w-full">
@@ -118,10 +120,10 @@ const Hero = () => {
               </a>
             </div>
           </div>
-          <div className="w-full lg:w-[40%] flex justify-center lg:justify-end mb-8 lg:mb-0">
+          <div className="w-full lg:w-[50%] flex justify-center lg:justify-end mb-8 lg:mb-0 lg:mr-10">
             <img
-              src="https://content.jdmagicbox.com/comp/delhi/t9/011pxx11.xx11.220621160256.z9t9/catalogue/s-k-placement-service-centre-ashok-vihar-delhi-placement-services-for-maids-for-employers--zm1wzb9hc7.jpg"
-              className="max-w-xs md:max-w-sm"
+              src={heroImg}
+              className="max-w-md md:max-w-lg"
               alt="Watch Illustration"
             />
           </div>
