@@ -11,8 +11,10 @@ function NewUpdates() {
     image: null,
   });
   const [isAddingUpdate, setIsAddingUpdate] = useState(false);
+  const [isEditingUpdate, setIsEditingUpdate] = useState(false);
+  const [editingId, setEditingId] = useState(null);
 
-  const apiUrl = "https://selectmaidbackendhost.vercel.app"
+  const apiUrl = "https://selectmaidbackendhost.vercel.app";
 
   useEffect(() => {
     const fetchNewUpdates = async () => {
@@ -42,6 +44,26 @@ function NewUpdates() {
 
   const handleCloseAddUpdate = () => {
     setIsAddingUpdate(false);
+    setFormData({
+      heading: '',
+      description: '',
+      image: null,
+    });
+  };
+
+  const handleOpenEditUpdate = (update) => {
+    setEditingId(update._id);
+    setFormData({
+      heading: update.heading,
+      description: update.description,
+      image: null,
+    });
+    setIsEditingUpdate(true);
+  };
+
+  const handleCloseEditUpdate = () => {
+    setIsEditingUpdate(false);
+    setEditingId(null);
     setFormData({
       heading: '',
       description: '',
@@ -85,6 +107,30 @@ function NewUpdates() {
     }
   };
 
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+
+    try {
+      const formDataToSend = new FormData();
+      formDataToSend.append('heading', formData.heading);
+      formDataToSend.append('description', formData.description);
+      if (formData.image) {
+        formDataToSend.append('image', formData.image);
+      }
+
+      const response = await axios.put(`${apiUrl}/new-update/update-new-update/${editingId}`, formDataToSend, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      setNewUpdates(newUpdates.map(update => update._id === editingId ? response.data : update));
+      handleCloseEditUpdate();
+    } catch (error) {
+      setError('Error updating new update');
+    }
+  };
+
   if (error) {
     return <div>Error: {error}</div>;
   }
@@ -114,7 +160,12 @@ function NewUpdates() {
                   >
                     Delete
                   </button>
-                  {/* Update button functionality to be added */}
+                  <button
+                    onClick={() => handleOpenEditUpdate(update)}
+                    className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  >
+                    Update
+                  </button>
                 </div>
               </div>
             ))}
@@ -185,6 +236,68 @@ function NewUpdates() {
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                   >
                     Add Update
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Edit Update Dialog */}
+      {isEditingUpdate && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
+          <div className="bg-gray-100 w-3/4 md:max-w-md mx-auto rounded-lg shadow-lg overflow-hidden">
+            <div className="p-4">
+              <h2 className="text-xl font-bold mb-4 text-black">Edit Update</h2>
+              <form onSubmit={handleUpdate}>
+                <div className="mb-4">
+                  <label htmlFor="heading" className="block text-gray-700 text-sm font-bold mb-2">Heading</label>
+                  <input
+                    type="text"
+                    id="heading"
+                    name="heading"
+                    value={formData.heading}
+                    onChange={handleInputChange}
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    required
+                  />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="description" className="block text-gray-700 text-sm font-bold mb-2">Description</label>
+                  <textarea
+                    id="description"
+                    name="description"
+                    value={formData.description}
+                    onChange={handleInputChange}
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    required
+                  />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="image" className="block text-gray-700 text-sm font-bold mb-2">Image</label>
+                  <input
+                    type="file"
+                    id="image"
+                    name="image"
+                    onChange={handleFileChange}
+                    accept="image/*"
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  />
+                </div>
+                <div className="flex justify-end">
+                  <button
+                    type="button"
+                    onClick={handleCloseEditUpdate}
+                    className="mr-2 bg-gray-600 hover:bg-gray-700 text-gray-200 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  >
+                    Update
                   </button>
                 </div>
               </form>

@@ -11,6 +11,13 @@ const Hero = () => {
     setIsMenuOpen(false);
   };
 
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      closeMenu(); // Close the menu after scrolling
+    }
+  };
 
   return (
     <main className="dark:bg-gray-800 bg-white relative overflow-hidden h-screen">
@@ -21,30 +28,54 @@ const Hero = () => {
           </div>
           <div className="flex items-center">
             <nav className="font-sen text-gray-800 dark:text-white uppercase text-lg hidden lg:flex items-center">
-              <a href="#overview" className="py-2 px-4" onClick={closeMenu}>
+              <button
+                onClick={() => scrollToSection("overview")}
+                className="py-2 px-4"
+              >
                 Overview
-              </a>
-              <a href="#about" className="py-2 px-4" onClick={closeMenu}>
+              </button>
+              <button
+                onClick={() => scrollToSection("about")}
+                className="py-2 px-4"
+              >
                 About
-              </a>
-              <a href="#new-update" className="py-2 px-4" onClick={closeMenu}>
+              </button>
+              <button
+                onClick={() => scrollToSection("new-update")}
+                className="py-2 px-4"
+              >
                 New Updates
-              </a>
-              <a href="#gallery" className="py-2 px-4" onClick={closeMenu}>
+              </button>
+              <button
+                onClick={() => scrollToSection("gallery")}
+                className="py-2 px-4"
+              >
                 Gallery
-              </a>
-              <a href="#reviews" className="py-2 px-4" onClick={closeMenu}>
+              </button>
+              <button
+                onClick={() => scrollToSection("reviews")}
+                className="py-2 px-4"
+              >
                 Review
-              </a>
-              <a href="#services" className="py-2 px-4" onClick={closeMenu}>
+              </button>
+              <button
+                onClick={() => scrollToSection("services")}
+                className="py-2 px-4"
+              >
                 Services
-              </a>
-              <a href="#branches" className="py-2" onClick={closeMenu}>
+              </button>
+              <button
+                onClick={() => scrollToSection("branches")}
+                className="py-2 px-4"
+              >
                 Branches
-              </a>
-              <a href="#contact" className="py-2 px-4" onClick={closeMenu}>
+              </button>
+              <button
+                onClick={() => scrollToSection("contact")}
+                className="py-2 px-4"
+              >
                 Contact
-              </a>
+              </button>
             </nav>
             <button
               onClick={toggleMenu}
@@ -65,48 +96,84 @@ const Hero = () => {
               ✕
             </button>
             <nav className="flex flex-col text-white uppercase text-lg space-y-4">
-              <a href="#overview" className="py-2" onClick={closeMenu}>
+              <button
+                onClick={() => {
+                  scrollToSection("overview");
+                }}
+                className="py-2"
+              >
                 Overview
-              </a>
-              <a href="#about" className="py-2" onClick={closeMenu}>
+              </button>
+              <button
+                onClick={() => {
+                  scrollToSection("about");
+                }}
+                className="py-2"
+              >
                 About
-              </a>
-              <a href="#new-update" className="py-2" onClick={closeMenu}>
+              </button>
+              <button
+                onClick={() => {
+                  scrollToSection("new-update");
+                }}
+                className="py-2"
+              >
                 New Updates
-              </a>
-              <a href="#gallery" className="py-2" onClick={closeMenu}>
+              </button>
+              <button
+                onClick={() => {
+                  scrollToSection("gallery");
+                }}
+                className="py-2"
+              >
                 Gallery
-              </a>
-              <a href="#reviews" className="py-2" onClick={closeMenu}>
+              </button>
+              <button
+                onClick={() => {
+                  scrollToSection("reviews");
+                }}
+                className="py-2"
+              >
                 Review
-              </a>
-              <a href="#services" className="py-2" onClick={closeMenu}>
+              </button>
+              <button
+                onClick={() => {
+                  scrollToSection("services");
+                }}
+                className="py-2"
+              >
                 Services
-              </a>
-              <a href="#branches" className="py-2" onClick={closeMenu}>
+              </button>
+              <button
+                onClick={() => {
+                  scrollToSection("branches");
+                }}
+                className="py-2"
+              >
                 Branches
-              </a>
-              <a href="#contact" className="py-2" onClick={closeMenu}>
+              </button>
+              <button
+                onClick={() => {
+                  scrollToSection("contact");
+                }}
+                className="py-2"
+              >
                 Contact
-              </a>
+              </button>
             </nav>
           </div>
         )}
       </header>
-      <div
-        className={`bg-white dark:bg-gray-800 flex relative z-20 items-center overflow-hidden ${
-          isMenuOpen ? "blur" : ""
-        }`}
-      >
+      <div className="bg-white dark:bg-gray-800 flex relative z-20 items-center overflow-hidden">
         <div className="container mx-auto px-6 flex flex-col lg:flex-row items-center justify-between relative py-8 lg:py-8">
           <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start relative z-20 text-center lg:text-left">
             <span className="w-20 h-2 bg-gray-800 dark:bg-white mb-8 lg:mb-12"></span>
             <h1 className="font-bebas-neue uppercase text-6xl sm:text-6xl lg:text-3xl font-black flex flex-col leading-none dark:text-white text-gray-800">
-            Spotless Reliable
+              Spotless Reliable
               <span className="text-4xl sm:text-5xl lg:text-7xl">Trusted</span>
             </h1>
             <p className="text-sm sm:text-base text-gray-700 dark:text-white mt-4 lg:mt-8">
-            Your premier choice for pristine homes. We specialize in meticulous cleaning services tailored to exceed your expectations with every visit.
+              Your premier choice for pristine homes. We specialize in meticulous cleaning services tailored to exceed your expectations with every visit.
             </p>
             <div className="flex mt-8">
               <a

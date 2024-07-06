@@ -13,8 +13,10 @@ function Branches() {
     image: null,
   });
   const [isAddingBranch, setIsAddingBranch] = useState(false);
+  const [isEditingBranch, setIsEditingBranch] = useState(false);
+  const [editingBranchId, setEditingBranchId] = useState(null);
 
-  const apiUrl = "https://selectmaidbackendhost.vercel.app"
+  const apiUrl = "https://selectmaidbackendhost.vercel.app";
 
   useEffect(() => {
     const fetchBranches = async () => {
@@ -44,6 +46,29 @@ function Branches() {
 
   const handleCloseAddBranch = () => {
     setIsAddingBranch(false);
+    setFormData({
+      name: '',
+      address: '',
+      phone: '',
+      email: '',
+      image: null,
+    });
+  };
+
+  const handleOpenEditBranch = (branch) => {
+    setIsEditingBranch(true);
+    setEditingBranchId(branch._id);
+    setFormData({
+      name: branch.name,
+      address: branch.address,
+      phone: branch.phone,
+      email: branch.email,
+      image: null,
+    });
+  };
+
+  const handleCloseEditBranch = () => {
+    setIsEditingBranch(false);
     setFormData({
       name: '',
       address: '',
@@ -91,6 +116,32 @@ function Branches() {
     }
   };
 
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+
+    try {
+      const formDataToSend = new FormData();
+      formDataToSend.append('name', formData.name);
+      formDataToSend.append('address', formData.address);
+      formDataToSend.append('phone', formData.phone);
+      formDataToSend.append('email', formData.email);
+      if (formData.image) {
+        formDataToSend.append('image', formData.image);
+      }
+
+      const response = await axios.put(`${apiUrl}/branch/update-branch/${editingBranchId}`, formDataToSend, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      setBranches(branches.map(branch => (branch._id === editingBranchId ? response.data : branch)));
+      handleCloseEditBranch();
+    } catch (error) {
+      setError('Error updating branch');
+    }
+  };
+
   if (error) {
     return <div>Error: {error}</div>;
   }
@@ -122,7 +173,12 @@ function Branches() {
                   >
                     Delete
                   </button>
-                  {/* Update button functionality to be added */}
+                  <button
+                    onClick={() => handleOpenEditBranch(branch)}
+                    className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  >
+                    Update
+                  </button>
                 </div>
               </div>
             ))}
@@ -194,21 +250,20 @@ function Branches() {
                   />
                 </div>
                 <div className="mb-4">
-                  <label htmlFor="image" className="block text-gray-700 text-sm font-bold mb-2">Image</label>
+                  <label htmlFor="image" className="block text-gray-700 text-sm font-bold mb-2">Branch Image</label>
                   <input
                     type="file"
                     id="image"
                     name="image"
-                    onChange={handleImageChange}
                     accept="image/*"
+                    onChange={handleImageChange}
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   />
                 </div>
                 <div className="flex justify-end">
                   <button
-                    type="button"
                     onClick={handleCloseAddBranch}
-                    className="mr-2 bg-gray-600 hover:bg-gray-700 text-gray-200 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2"
                   >
                     Cancel
                   </button>
@@ -216,7 +271,93 @@ function Branches() {
                     type="submit"
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                   >
-                    Add Branch
+                    Save
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Edit Branch Dialog */}
+      {isEditingBranch && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
+          <div className="bg-gray-100 w-3/4 md:max-w-md mx-auto rounded-lg shadow-lg overflow-hidden">
+            <div className="p-4">
+              <h2 className="text-xl font-bold mb-4 text-black">Edit Branch</h2>
+              <form onSubmit={handleUpdate}>
+                <div className="mb-4">
+                  <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">Branch Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    required
+                  />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="address" className="block text-gray-700 text-sm font-bold mb-2">Address</label>
+                  <input
+                    type="text"
+                    id="address"
+                    name="address"
+                    value={formData.address}
+                    onChange={handleInputChange}
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    required
+                  />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="phone" className="block text-gray-700 text-sm font-bold mb-2">Phone Number</label>
+                  <input
+                    type="text"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    required
+                  />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">Email Address</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    required
+                  />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="image" className="block text-gray-700 text-sm font-bold mb-2">Branch Image</label>
+                  <input
+                    type="file"
+                    id="image"
+                    name="image"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  />
+                </div>
+                <div className="flex justify-end">
+                  <button
+                    onClick={handleCloseEditBranch}
+                    className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  >
+                    Update
                   </button>
                 </div>
               </form>

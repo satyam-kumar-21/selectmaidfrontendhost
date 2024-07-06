@@ -11,6 +11,13 @@ function Services() {
     image: null,
   });
   const [isAddingService, setIsAddingService] = useState(false);
+  const [isEditingService, setIsEditingService] = useState(false);
+  const [editingService, setEditingService] = useState(null);
+  const [updatedFormData, setUpdatedFormData] = useState({
+    heading: '',
+    description: '',
+    image: null,
+  });
 
   const apiUrl = "https://selectmaidbackendhost.vercel.app";
 
@@ -49,18 +56,52 @@ function Services() {
     });
   };
 
-  const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
+  const handleOpenEditService = (service) => {
+    setEditingService(service);
+    setUpdatedFormData({
+      heading: service.heading,
+      description: service.description,
+      image: null, // Handle image if needed
+    });
+    setIsEditingService(true);
+  };
+
+  const handleCloseEditService = () => {
+    setIsEditingService(false);
+    setEditingService(null);
+    setUpdatedFormData({
+      heading: '',
+      description: '',
+      image: null,
     });
   };
 
+  const handleInputChange = (e) => {
+    if (isEditingService) {
+      setUpdatedFormData({
+        ...updatedFormData,
+        [e.target.name]: e.target.value,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.value,
+      });
+    }
+  };
+
   const handleImageChange = (e) => {
-    setFormData({
-      ...formData,
-      image: e.target.files[0],
-    });
+    if (isEditingService) {
+      setUpdatedFormData({
+        ...updatedFormData,
+        image: e.target.files[0],
+      });
+    } else {
+      setFormData({
+        ...formData,
+        image: e.target.files[0],
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -73,7 +114,6 @@ function Services() {
       formDataToSend.append('image', formData.image);
 
       const response = await axios.post(`${apiUrl}/service/create-service`, formDataToSend, {
-        // withCredentials: true, // Send credentials with the request if required by your backend
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -83,6 +123,32 @@ function Services() {
       handleCloseAddService();
     } catch (error) {
       setError('Error creating new service');
+    }
+  };
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+
+    try {
+      const formDataToSend = new FormData();
+      formDataToSend.append('heading', updatedFormData.heading);
+      formDataToSend.append('description', updatedFormData.description);
+      formDataToSend.append('image', updatedFormData.image);
+
+      const response = await axios.put(`${apiUrl}/service/update-service/${editingService._id}`, formDataToSend, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      // Update the service in the state
+      const updatedServices = services.map(service =>
+        service._id === editingService._id ? response.data : service
+      );
+      setServices(updatedServices);
+      handleCloseEditService();
+    } catch (error) {
+      setError('Error updating service');
     }
   };
 
@@ -115,7 +181,12 @@ function Services() {
                   >
                     Delete
                   </button>
-                  {/* Update button functionality to be added */}
+                  <button
+                    onClick={() => handleOpenEditService(service)}
+                    className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2"
+                  >
+                    Update
+                  </button>
                 </div>
               </div>
             ))}
@@ -187,6 +258,70 @@ function Services() {
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                   >
                     Add Service
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Edit Service Dialog */}
+      {isEditingService && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
+          <div className="bg-gray-100 w-3/4 md:max-w-md mx-auto rounded-lg shadow-lg overflow-hidden">
+            <div className="p-4">
+              <h2 className="text-xl font-bold mb-4 text-black">Edit Service</h2>
+              <form onSubmit={handleUpdate}>
+                <div className="mb-4">
+                  <label htmlFor="heading" className="block text-gray-700 text-sm font-bold mb-2">Heading</label>
+                  <input
+                    type="text"
+                    id="heading"
+                    name="heading"
+                    value={updatedFormData.heading}
+                    onChange={handleInputChange}
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    required
+                  />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="description" className="block text-gray-700 text-sm font-bold mb-2">Description</label>
+                  <textarea
+                    id="description"
+                    name="description"
+                    value={updatedFormData.description}
+                    onChange={handleInputChange}
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    rows="4"
+                    placeholder="Enter description"
+                    required
+                  />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="image" className="block text-gray-700 text-sm font-bold mb-2">Image</label>
+                  <input
+                    type="file"
+                    id="image"
+                    name="image"
+                    onChange={handleImageChange}
+                    accept="image/*"
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  />
+                </div>
+                <div className="flex justify-end">
+                  <button
+                    type="button"
+                    onClick={handleCloseEditService}
+                    className="mr-2 bg-gray-600 hover:bg-gray-700 text-gray-200 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  >
+                    Update Service
                   </button>
                 </div>
               </form>

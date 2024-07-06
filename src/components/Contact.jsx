@@ -1,10 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import { MailIcon, PhoneIcon, ExternalLinkIcon } from '@heroicons/react/outline';
 
 const Contact = () => {
-  const handleSubmit = (event) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+  const [submitting, setSubmitting] = useState(false);
+  const [message, setMessage] = useState('');
+  const apiUrl = "https://selectmaidbackendhost.vercel.app";
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    });
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Handle form submission logic here
+    setSubmitting(true);
+
+    try {
+      const response = await axios.post(`${apiUrl}/contact/submit`, formData);
+
+      if (response.status === 200) {
+        setMessage(response.data.message);
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        setMessage('Failed to send message');
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+      setMessage('Failed to send message');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -49,23 +83,52 @@ const Contact = () => {
                   <label htmlFor="name" className="block text-gray-800 dark:text-white font-semibold mb-2">
                     Name
                   </label>
-                  <input type="text" id="name" name="name" className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-pink-500 focus:ring focus:ring-pink-500 focus:ring-opacity-50" required />
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-pink-500 focus:ring focus:ring-pink-500 focus:ring-opacity-50"
+                    required
+                  />
                 </div>
                 <div className="mb-4">
                   <label htmlFor="email" className="block text-gray-800 dark:text-white font-semibold mb-2">
                     Email Address
                   </label>
-                  <input type="email" id="email" name="email" className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-pink-500 focus:ring focus:ring-pink-500 focus:ring-opacity-50" required />
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-pink-500 focus:ring focus:ring-pink-500 focus:ring-opacity-50"
+                    required
+                  />
                 </div>
                 <div className="mb-4">
                   <label htmlFor="message" className="block text-gray-800 dark:text-white font-semibold mb-2">
                     Message
                   </label>
-                  <textarea id="message" name="message" rows="4" className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-pink-500 focus:ring focus:ring-pink-500 focus:ring-opacity-50" required></textarea>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    rows="4"
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-pink-500 focus:ring focus:ring-pink-500 focus:ring-opacity-50"
+                    required
+                  ></textarea>
                 </div>
-                <button type="submit" className="bg-pink-500 text-white py-2 px-4 rounded-md hover:bg-pink-400 focus:outline-none focus:bg-pink-400">
-                  Send Message
+                <button
+                  type="submit"
+                  className="bg-pink-500 text-white py-2 px-4 rounded-md hover:bg-pink-400 focus:outline-none focus:bg-pink-400"
+                  disabled={submitting}
+                >
+                  {submitting ? 'Sending...' : 'Send Message'}
                 </button>
+                {message && <p className="mt-2 text-sm text-gray-700 dark:text-white">{message}</p>}
               </form>
             </div>
           </div>

@@ -12,6 +12,8 @@ function Review() {
     image: null,
   });
   const [isAddingRating, setIsAddingRating] = useState(false);
+  const [isEditingRating, setIsEditingRating] = useState(false);
+  const [editingRatingId, setEditingRatingId] = useState(null);
 
   const apiUrl = "https://selectmaidbackendhost.vercel.app";
 
@@ -43,6 +45,28 @@ function Review() {
 
   const handleCloseAddRating = () => {
     setIsAddingRating(false);
+    setFormData({
+      name: '',
+      description: '',
+      rating: '',
+      image: null,
+    });
+  };
+
+  const handleOpenEditRating = (rating) => {
+    setIsEditingRating(true);
+    setEditingRatingId(rating._id);
+    setFormData({
+      name: rating.name,
+      description: rating.description,
+      rating: rating.rating,
+      image: null, // Assume editing image functionality is separate or optional
+    });
+  };
+
+  const handleCloseEditRating = () => {
+    setIsEditingRating(false);
+    setEditingRatingId(null);
     setFormData({
       name: '',
       description: '',
@@ -88,6 +112,31 @@ function Review() {
     }
   };
 
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+
+    try {
+      const formDataToSend = new FormData();
+      formDataToSend.append('name', formData.name);
+      formDataToSend.append('description', formData.description);
+      formDataToSend.append('rating', formData.rating);
+      if (formData.image) {
+        formDataToSend.append('image', formData.image);
+      }
+
+      const response = await axios.put(`${apiUrl}/rating/update-rating/${editingRatingId}`, formDataToSend, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      setRatings(ratings.map(rating => (rating._id === editingRatingId ? response.data : rating)));
+      handleCloseEditRating();
+    } catch (error) {
+      setError('Error updating rating: ' + error.message);
+    }
+  };
+
   if (error) {
     return <div>Error: {error}</div>;
   }
@@ -118,7 +167,12 @@ function Review() {
                   >
                     Delete
                   </button>
-                  {/* Update button functionality to be added */}
+                  <button
+                    onClick={() => handleOpenEditRating(rating)}
+                    className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  >
+                    Update
+                  </button>
                 </div>
               </div>
             ))}
@@ -204,6 +258,84 @@ function Review() {
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                   >
                     Add Rating
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Edit Rating Dialog */}
+      {isEditingRating && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
+          <div className="bg-gray-100 w-3/4 md:max-w-md mx-auto rounded-lg shadow-lg overflow-hidden">
+            <div className="p-4">
+              <h2 className="text-xl font-bold mb-4 text-black">Edit Rating</h2>
+              <form onSubmit={handleUpdate}>
+                <div className="mb-4">
+                  <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    required
+                  />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="description" className="block text-gray-700 text-sm font-bold mb-2">Description</label>
+                  <textarea
+                    id="description"
+                    name="description"
+                    value={formData.description}
+                    onChange={handleInputChange}
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    rows="4"
+                    placeholder="Enter description"
+                    required
+                  />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="rating" className="block text-gray-700 text-sm font-bold mb-2">Rating</label>
+                  <input
+                    type="number"
+                    id="rating"
+                    name="rating"
+                    value={formData.rating}
+                    onChange={handleInputChange}
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    min="1"
+                    max="5"
+                    required
+                  />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="image" className="block text-gray-700 text-sm font-bold mb-2">Profile pic</label>
+                  <input
+                    type="file"
+                    id="image"
+                    name="image"
+                    onChange={handleImageChange}
+                    accept="image/*"
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  />
+                </div>
+                <div className="flex justify-end">
+                  <button
+                    type="button"
+                    onClick={handleCloseEditRating}
+                    className="mr-2 bg-gray-600 hover:bg-gray-700 text-gray-200 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  >
+                    Update Rating
                   </button>
                 </div>
               </form>
