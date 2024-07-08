@@ -169,11 +169,16 @@ const Hero = () => {
           <div className="w-full lg:w-1/2 flex flex-col items-center lg:items-start relative z-20 text-center lg:text-left">
             <span className="w-20 h-2 bg-gray-800 dark:bg-white mb-8 lg:mb-12"></span>
             <h1 className="font-bebas-neue uppercase text-6xl sm:text-6xl lg:text-3xl font-black flex flex-col leading-none dark:text-white text-gray-800">
-            Verified Reliable
+              Verified Reliable
               <span className="text-4xl sm:text-5xl lg:text-7xl">Trusted</span>
             </h1>
             <p className="text-sm sm:text-base text-gray-700 dark:text-white mt-4 lg:mt-8">
-              Your premier choice for pristine homes. We specialize in meticulous cleaning services tailored to exceed your expectations with every visit.
+              "We Give You! Professionalism, Reliability, Honesty, Perfect Documentation, No
+              Advance Payment, Service Satisfaction, Service Guarantee,
+              Unlimited Replacement, if No Service than Refund, Comprehensive
+              Services for home help services manpower, Transparent
+              Communication, 24 hours dedicated customer care services on call
+              or WhatsApp."
             </p>
             <div className="flex mt-8">
               <a

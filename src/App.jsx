@@ -12,6 +12,9 @@ import Services from "./components/Admin/Services.jsx";
 import Branches from "./components/Admin/Branches.jsx";
 import Contact from "./components/Admin/Contact.jsx";
 import PrivateRoute from "./components/Admin/PrivateRoute.jsx";
+import DelhiHome from './components/delhi/DelhiHome.jsx';
+import NoidaHome from './components/noida/NoidaHome.jsx';
+import GurugramHome from './components/gurugram/GurugramHome.jsx';
 
 function App() {
   return (
@@ -30,6 +33,11 @@ function App() {
       <Route path="/admin/services" element={<PrivateRoute><Services /></PrivateRoute>} />
       <Route path="/admin/branches" element={<PrivateRoute><Branches /></PrivateRoute>} />
       <Route path="/admin/contact" element={<PrivateRoute><Contact /></PrivateRoute>} />
+
+      <Route path="/maid-in-delhi" element={<DelhiHome />} />
+      <Route path="/maid-in-noida" element={<NoidaHome />} />
+      <Route path="/maid-in-gurugram" element={<GurugramHome />} />
+      
     </Routes>
   </BrowserRouter>
     
