@@ -16,7 +16,9 @@ const Overview = () => {
               <h3 className="text-xl font-semibold text-gray-800 dark:text-white text-center mb-2">
               Customized Cleaning Plans
               </h3>
-              
+              <p className="text-gray-600 dark:text-gray-300 text-center">
+              Personalized services tailored to your specific cleaning needs for thorough and efficient results every time.
+              </p>
             </div>
           </div>
           <div className="w-full md:w-1/3 px-4 py-6">
@@ -24,7 +26,9 @@ const Overview = () => {
               <h3 className="text-xl font-semibold text-gray-800 dark:text-white text-center mb-2">
               Trained Professionals
               </h3>
-              
+              <p className="text-gray-600 dark:text-gray-300 text-center">
+              Experienced cleaners committed to delivering high-quality service with attention to detail and efficiency.
+              </p>
             </div>
           </div>
           <div className="w-full md:w-1/3 px-4 py-6">
@@ -32,7 +36,9 @@ const Overview = () => {
               <h3 className="text-xl font-semibold text-gray-800 dark:text-white text-center mb-2">
               Satisfaction Guaranteed
               </h3>
-             
+              <p className="text-gray-600 dark:text-gray-300 text-center">
+              We ensure your complete satisfaction with our meticulous cleaning and dedication to exceeding expectations.
+              </p>
             </div>
           </div>
         </div>
