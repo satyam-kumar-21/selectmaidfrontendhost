@@ -23,7 +23,7 @@ const Hero = () => {
     <main className="dark:bg-gray-800 bg-white relative overflow-hidden h-screen">
       <header className="h-24 sm:h-32 flex items-center z-30 w-full">
         <div className="container mx-auto px-6 flex items-center justify-between">
-          <div className="uppercase text-gray-800 dark:text-white font-black text-3xl">
+          <div className="uppercase text-red-500 dark:text-red-500 font-black text-3xl">
             Select Maid
           </div>
           <div className="flex items-center">

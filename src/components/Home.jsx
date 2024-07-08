@@ -9,6 +9,7 @@ import Services from './Services'
 import Contact from './Contact'
 import Footer from './Footer'
 import Branches from './Branches'
+import FixedButtons from './FixedButtons '
 
 function Home() {
   return (
@@ -23,6 +24,7 @@ function Home() {
     <Branches />
     <Contact />
     <Footer/>
+    <FixedButtons />
     </>
   )
 }
