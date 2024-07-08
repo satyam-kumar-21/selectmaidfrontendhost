@@ -15,7 +15,7 @@ function Home() {
   return (
     <>
     <Hero />
-    <Overview />
+   // <Overview />
     <About />
     <Services />
     <NewUpdates />

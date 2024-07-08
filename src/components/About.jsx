@@ -30,6 +30,7 @@ const About = () => {
       <div className="container mx-auto px-6 py-16">
         <div className="flex flex-col lg:flex-row items-center justify-between">
           <div className="lg:w-1/2 lg:pr-12">
+          
             <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-8">
               {aboutData.title}
             </h2>
