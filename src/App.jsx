@@ -15,12 +15,20 @@ import PrivateRoute from "./components/Admin/PrivateRoute.jsx";
 import DelhiHome from './components/delhi/DelhiHome.jsx';
 import NoidaHome from './components/noida/NoidaHome.jsx';
 import GurugramHome from './components/gurugram/GurugramHome.jsx';
+import ScrollToTop from './components/ScrollToTop.jsx';
+import TermsConditionsPage from './components/TermsConditionsPage.jsx';
+import PrivacyPolicyPage from './components/PrivacyPolicyPage.jsx';
+import MaidInDelhi from './components/Admin/MaidInDelhi.jsx';
+import MaidInNoida from './components/Admin/MaidInNoida.jsx';
+import MaidInGurugram from './components/Admin/MaidInGurugram.jsx';
 
 function App() {
   return (
     <>
     <BrowserRouter>
+    <ScrollToTop />
     <Routes>
+    
       <Route path="/" element={<Home />} />
       <Route path="/admin/" element={<Admin />} />
       <Route path="/admin/login" element={<AdminLogin />} />
@@ -33,10 +41,16 @@ function App() {
       <Route path="/admin/services" element={<PrivateRoute><Services /></PrivateRoute>} />
       <Route path="/admin/branches" element={<PrivateRoute><Branches /></PrivateRoute>} />
       <Route path="/admin/contact" element={<PrivateRoute><Contact /></PrivateRoute>} />
+      <Route path="/admin/maid-in-delhi" element={<PrivateRoute><MaidInDelhi /></PrivateRoute>} />
+      <Route path="/admin/maid-in-noida" element={<PrivateRoute><MaidInNoida /></PrivateRoute>} />
+      <Route path="/admin/maid-in-gurugram" element={<PrivateRoute><MaidInGurugram /></PrivateRoute>} />
 
       <Route path="/maid-in-delhi" element={<DelhiHome />} />
       <Route path="/maid-in-noida" element={<NoidaHome />} />
       <Route path="/maid-in-gurugram" element={<GurugramHome />} />
+
+      <Route path="/select-maid-terms-conditions" element={<TermsConditionsPage />} />
+      <Route path="/select-maid-privacy-policy" element={<PrivacyPolicyPage />} />
       
     </Routes>
   </BrowserRouter>

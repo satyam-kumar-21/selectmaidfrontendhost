@@ -11,7 +11,7 @@ const AdminSidebar = () => {
   };
 
   return (
-    <aside className="w-64 bg-gray-900 text-white h-screen fixed shadow-lg">
+    <aside className="w-64 bg-gray-900 text-white h-screen fixed shadow-lg overflow-y-auto">
       <div className="p-6">
         <h2 className="text-3xl font-semibold mb-6 text-center">Admin Panel</h2>
         <nav>
@@ -46,8 +46,21 @@ const AdminSidebar = () => {
                 Branches
               </Link>
             </li>
-
-            
+            <li>
+              <Link to="/admin/maid-in-delhi" className="bg-gray-700 hover:bg-gray-600 py-2 px-4 block rounded text-center transition duration-300">
+                Maid In Delhi
+              </Link>
+            </li>
+            <li>
+              <Link to="/admin/maid-in-noida" className="bg-gray-700 hover:bg-gray-600 py-2 px-4 block rounded text-center transition duration-300">
+                Maid In Noida
+              </Link>
+            </li>
+            <li>
+              <Link to="/admin/maid-in-gurugram" className="bg-gray-700 hover:bg-gray-600 py-2 px-4 block rounded text-center transition duration-300">
+                Maid In Gurugram
+              </Link>
+            </li>
           </ul>
         </nav>
         <div className="mt-auto">

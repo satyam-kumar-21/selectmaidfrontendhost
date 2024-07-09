@@ -26,7 +26,7 @@ const Review = ({ name, text, rating, imageUrl }) => {
             <img
               className="h-12 w-12 rounded-full object-cover"
               src={imageUrl} // Use the imageUrl prop
-              alt={`Avatar of ${name}`}
+              alt="select-maid-customer-review"
             />
           </div>
           <div className="ml-3">

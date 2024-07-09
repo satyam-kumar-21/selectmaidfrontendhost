@@ -43,12 +43,22 @@ const Footer = () => {
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
                 <li className="mb-4">
                   <a href="/github-link" className="hover:underline">
-                    GitHub
+                  Instagram
+                  </a>
+                </li>
+                <li className="mb-4">
+                  <a href="/discord-link" className="hover:underline">
+                  Facebook
+                  </a>
+                </li>
+                <li className="mb-4">
+                  <a href="/github-link" className="hover:underline">
+                  YouTube
                   </a>
                 </li>
                 <li>
                   <a href="/discord-link" className="hover:underline">
-                    Discord
+                  Twitter
                   </a>
                 </li>
               </ul>
@@ -59,14 +69,14 @@ const Footer = () => {
               </h2>
               <ul className="text-gray-500 dark:text-gray-400 font-medium">
                 <li className="mb-4">
-                  <a href="/privacy-policy" className="hover:underline">
+                  <Link to="/select-maid-privacy-policy" className="hover:underline">
                     Privacy Policy
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="/terms-conditions" className="hover:underline">
+                  <Link to="/select-maid-terms-conditions" className="hover:underline">
                     Terms & Conditions
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

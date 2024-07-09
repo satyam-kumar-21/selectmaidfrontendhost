@@ -20,7 +20,7 @@ const Hero = () => {
   };
 
   return (
-    <main className="dark:bg-gray-800 bg-white relative overflow-hidden h-screen">
+    <main className="dark:bg-gray-800 bg-white relative overflow-hidden max-h-screen">
       <header className="h-24 sm:h-32 flex items-center z-30 w-full">
         <div className="container mx-auto px-6 flex items-center justify-between">
           <div className="uppercase text-red-500 dark:text-red-500 font-black text-3xl">
@@ -28,12 +28,7 @@ const Hero = () => {
           </div>
           <div className="flex items-center">
             <nav className="font-sen text-gray-800 dark:text-white uppercase text-lg hidden lg:flex items-center">
-              <button
-                onClick={() => scrollToSection("overview")}
-                className="py-2 px-4"
-              >
-                Overview
-              </button>
+              
               <button
                 onClick={() => scrollToSection("about")}
                 className="py-2 px-4"
@@ -96,14 +91,7 @@ const Hero = () => {
               ✕
             </button>
             <nav className="flex flex-col text-white uppercase text-lg space-y-4">
-              <button
-                onClick={() => {
-                  scrollToSection("overview");
-                }}
-                className="py-2"
-              >
-                Overview
-              </button>
+             
               <button
                 onClick={() => {
                   scrollToSection("about");
