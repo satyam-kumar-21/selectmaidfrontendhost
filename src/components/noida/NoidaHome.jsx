@@ -12,7 +12,6 @@ const NoidaHome = () => {
     <>
       <CityHeader />
       <NoidaAbout />
-      <MaidSection />
       <Services />
       <Gallery />
       <Contact />

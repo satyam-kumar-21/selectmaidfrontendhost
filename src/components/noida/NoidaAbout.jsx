@@ -6,10 +6,10 @@ const NoidaAbout = () => {
       <div className="container mx-auto text-center mb-8">
         <h2 className="text-3xl font-semibold mb-4">Maid in Noida</h2>
         <p className="text-lg leading-7">
-          At Select Maid, we offer a professional and reliable maid service in Delhi. Our team of maids is carefully selected, trained, and background-checked to ensure that you receive the best service possible. Whether you need a maid for household chores, babysitting, or elderly care, we have the right person for the job. Our maids are dedicated to providing high-quality service with a smile, ensuring that your home is clean, organized, and well-maintained.
+        At Select Maid Noida, we offer professional and reliable maid services tailored to meet your needs. Our team of maids undergoes careful selection, thorough training, and rigorous background checks to ensure the highest standards of service excellence. Whether you require assistance with household chores, babysitting, or elderly care, we have skilled professionals ready to assist you.
         </p>
         <p className="text-lg leading-7 mt-4">
-          We understand that finding a trustworthy maid can be challenging, which is why we prioritize safety and reliability. Our rigorous screening process and continuous training programs ensure that our maids meet the highest standards of professionalism and integrity. Choose Select Maid for peace of mind and exceptional service in Delhi.
+        We understand the importance of trust and reliability when hiring a maid. That's why we implement a strict screening process and continuous training programs to uphold professionalism and integrity at all times. Choose Select Maid Noida for peace of mind and exceptional maid services in your area.
         </p>
       </div>
     </section>

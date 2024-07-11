@@ -12,7 +12,6 @@ const GurugramHome = () => {
     <>
       <CityHeader />
       <GurugramAbout />
-      <MaidSection />
       <Services />
       <Gallery />
       <Contact />

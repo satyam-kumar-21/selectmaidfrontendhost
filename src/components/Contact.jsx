@@ -3,21 +3,14 @@ import axios from 'axios';
 import { MailIcon, PhoneIcon, ExternalLinkIcon } from '@heroicons/react/outline';
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState('');
   const apiUrl = "https://selectmaidbackendhost.vercel.app";
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (event) => {

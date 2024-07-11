@@ -12,7 +12,6 @@ const DelhiHome = () => {
     <>
       <CityHeader />
       <DelhiAbout />
-      <MaidSection />
       <Services />
       <Gallery />
       <Contact />
