@@ -3,7 +3,7 @@ import axios from 'axios';
 import { MailIcon, PhoneIcon, ExternalLinkIcon } from '@heroicons/react/outline';
 
 const Contact = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' , mobile:''});
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState('');
   const apiUrl = "https://selectmaidbackendhost.vercel.app";
@@ -22,7 +22,7 @@ const Contact = () => {
 
       if (response.status === 200) {
         setMessage(response.data.message);
-        setFormData({ name: '', email: '', message: '' });
+        setFormData({ name: '', email: '', message: '', mobile:'' });
       } else {
         setMessage('Failed to send message');
       }
@@ -81,6 +81,20 @@ const Contact = () => {
                     id="name"
                     name="name"
                     value={formData.name}
+                    onChange={handleChange}
+                    className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-pink-500 focus:ring focus:ring-pink-500 focus:ring-opacity-50"
+                    required
+                  />
+                </div>
+                <div className="mb-4">
+                  <label htmlFor="name" className="block text-gray-800 dark:text-white font-semibold mb-2">
+                    Mobile no.
+                  </label>
+                  <input
+                    type="text"
+                    id="mobile"
+                    name="mobile"
+                    value={formData.mobile}
                     onChange={handleChange}
                     className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none focus:border-pink-500 focus:ring focus:ring-pink-500 focus:ring-opacity-50"
                     required
