@@ -1,7 +1,14 @@
+// import { defineConfig } from 'vite'
+// import react from '@vitejs/plugin-react'
+
+// // https://vitejs.dev/config/
+// export default defineConfig({
+//   plugins: [react()],
+// })
+
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// Vite Configuration
 export default defineConfig({
     plugins: [react()],
     build: {
@@ -10,5 +17,4 @@ export default defineConfig({
     server: {
         port: 3000,
     },
-    base: './', // If deployed to a subdirectory, adjust the base path
 });
