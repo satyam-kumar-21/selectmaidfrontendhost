@@ -8,6 +8,7 @@ export default defineConfig({
         outDir: 'dist', // Ensure this matches your project's build output directory
     },
     server: {
-        port: 3000, // Optional: If you want to change the development server's port
+        port: 3000,
     },
+    base: './', // If deployed to a subdirectory, adjust the base path
 });
