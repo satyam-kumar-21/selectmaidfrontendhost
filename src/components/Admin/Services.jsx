@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AdminSidebar from './AdminSidebar';
+import { useSelector } from 'react-redux';
 
 function Services() {
-  const [services, setServices] = useState([]);
   const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     heading: '',
@@ -21,18 +21,8 @@ function Services() {
 
   const apiUrl = "https://selectmaidbackendhost.vercel.app";
 
-  useEffect(() => {
-    const fetchServices = async () => {
-      try {
-        const response = await axios.get(`${apiUrl}/service/get-all-services`);
-        setServices(response.data);
-      } catch (error) {
-        setError('Error fetching data');
-      }
-    };
+  const services = useSelector((state) => state.service.services);
 
-    fetchServices();
-  }, []);
 
   const handleDelete = async (id) => {
     try {

@@ -1,26 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import BranchCard from './BranchCard'; // Adjust the import path based on your project structure
+import { useSelector } from 'react-redux';
 
 const Branches = () => {
-  const [branches, setBranches] = useState([]);
-  const apiUrl = "https://selectmaidbackendhost.vercel.app"
-
-  useEffect(() => {
-    const fetchBranches = async () => {
-      try {
-        const response = await axios.get(`${apiUrl}/branch/get-all-branches`); // Replace with your backend route
-        if (!response.data) {
-          throw new Error('Failed to fetch branches');
-        }
-        setBranches(response.data);
-      } catch (error) {
-        console.error('Error fetching branches:', error);
-      }
-    };
-
-    fetchBranches();
-  }, []);
+ 
+  const branches = useSelector((state) => state.branch.branch);
 
   return (
     <section id='branches' className="bg-gray-100 dark:bg-gray-800 py-16">

@@ -1,26 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Review from './Review'; // Adjust the import path based on your project structure
+import { useSelector } from 'react-redux';
 
 const Reviews = () => {
-  const [reviews, setReviews] = useState([]);
-  const apiUrl = "https://selectmaidbackendhost.vercel.app"
-
-  useEffect(() => {
-    const fetchReviews = async () => {
-      try {
-        const response = await axios.get(`${apiUrl}/rating/get-all-ratings`); // Replace with your backend route
-        if (!response.data) {
-          throw new Error('Failed to fetch reviews');
-        }
-        setReviews(response.data);
-      } catch (error) {
-        console.error('Error fetching reviews:', error);
-      }
-    };
-
-    fetchReviews();
-  }, []);
+ 
+  const reviews = useSelector((state) => state.rating.ratings); 
 
   return (
     <section id='reviews' className="bg-gray-100 dark:bg-gray-800 py-16">

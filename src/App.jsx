@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from './components/Home.jsx';
 import Admin from "./components/Admin/Admin.jsx";
@@ -22,7 +22,32 @@ import MaidInDelhi from './components/Admin/MaidInDelhi.jsx';
 import MaidInNoida from './components/Admin/MaidInNoida.jsx';
 import MaidInGurugram from './components/Admin/MaidInGurugram.jsx';
 
+
+
+import { useDispatch, useSelector } from 'react-redux';
+import { getAboutAction } from './store/Action/actionAbout.jsx';
+import { getAllBranchesAction } from './store/Action/actionBranch.jsx';
+import { getAllGalleriesAction } from './store/Action/galleryAction.jsx';
+import { getAllNewUpdatesAction } from './store/Action/newUpdateAction.jsx';
+import { getAllRatingsAction } from './store/Action/ratingActions.jsx';
+import { getAllServicesAction } from './store/Action/serviceActions.jsx';
+
 function App() {
+ 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAboutAction());
+    dispatch(getAllBranchesAction());
+    dispatch(getAllGalleriesAction());
+    dispatch(getAllNewUpdatesAction());
+    dispatch(getAllRatingsAction());
+    dispatch(getAllServicesAction());
+  }, [dispatch]);
+
+
+
+
   return (
     <>
     <BrowserRouter>

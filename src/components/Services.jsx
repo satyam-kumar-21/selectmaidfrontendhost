@@ -1,25 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 const Services = () => {
-  const [services, setServices] = useState([]);
-  const apiUrl = "https://selectmaidbackendhost.vercel.app"
+ 
 
-  useEffect(() => {
-    const fetchServices = async () => {
-      try {
-        const response = await axios.get(`${apiUrl}/service/get-all-services`); // Replace with your backend route
-        if (!response.data) {
-          throw new Error('Failed to fetch services');
-        }
-        setServices(response.data);
-      } catch (error) {
-        console.error('Error fetching services:', error);
-      }
-    };
-
-    fetchServices();
-  }, []);
+  const services = useSelector((state) => state.service.services);
 
   return (
     <section id='services' className="bg-white dark:bg-gray-800 py-16">

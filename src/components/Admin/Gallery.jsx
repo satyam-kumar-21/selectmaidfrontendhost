@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AdminSidebar from './AdminSidebar';
+import { useSelector } from 'react-redux';
 
 function Gallery() {
-  const [galleries, setGalleries] = useState([]);
   const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     description: '',
@@ -15,18 +15,8 @@ function Gallery() {
 
   const apiUrl = "https://selectmaidbackendhost.vercel.app";
 
-  useEffect(() => {
-    const fetchGalleries = async () => {
-      try {
-        const response = await axios.get(`${apiUrl}/gallery/all-galleries`); // Replace with your actual API endpoint
-        setGalleries(response.data);
-      } catch (error) {
-        setError('Error fetching data');
-      }
-    };
+  const galleries = useSelector((state) => state.gallery.galleries); 
 
-    fetchGalleries();
-  }, []);
 
   const handleDelete = async (id) => {
     try {

@@ -11,11 +11,13 @@
   "proxy": "https://selectmaidbackendhost.vercel.app",
   "dependencies": {
     "@heroicons/react": "^1.0.6",
+    "@reduxjs/toolkit": "^2.6.1",
     "axios": "^0.21.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-helmet-async": "^2.0.5",
     "react-icons": "^5.2.1",
+    "react-redux": "^9.2.0",
     "react-router-dom": "^6.24.0",
     "swiper": "^11.1.4"
   },

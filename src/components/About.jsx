@@ -1,39 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 const About = () => {
-  const [aboutData, setAboutData] = useState(null);
-  const apiUrl = "https://selectmaidbackendhost.vercel.app";
+  // Use useSelector to get the aboutData from Redux store
+  const aboutData = useSelector((state) => state.about.about);  // Adjust the path based on your store structure
 
-  useEffect(() => {
-    const fetchAboutData = async () => {
-      try {
-        const response = await axios.get(`${apiUrl}/about/get-about`);
-        if (!response.data) {
-          throw new Error('Failed to fetch about data');
-        }
-        setAboutData(response.data);
-      } catch (error) {
-        console.error('Error fetching about data:', error);
-      }
-    };
-
-    fetchAboutData();
-  }, []);
-
+  // If aboutData is not available yet, you can show a loading message or a placeholder
   if (!aboutData) {
-    return null; // You can show a loading spinner or message here
+    return <div>Loading...</div>;  // Optional: Replace this with a spinner or other loading indicator
   }
 
   return (
-    <section id='about' className="bg-white dark:bg-gray-800">
+    <section id="about" className="bg-white dark:bg-gray-800">
       <div className="container mx-auto px-6 py-16">
         <div className="mb-8 text-center">
-          
-        
+          {/* You can add a title or some content here */}
         </div>
         <div className="flex flex-col lg:flex-row items-center justify-between">
-        
           <div className="lg:w-1/2 lg:pr-12">
             <h2 className="text-4xl font-bold text-gray-800 dark:text-white mb-8">
               About us

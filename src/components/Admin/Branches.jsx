@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AdminSidebar from './AdminSidebar';
+import { useSelector } from 'react-redux';
 
 function Branches() {
-  const [branches, setBranches] = useState([]);
   const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     name: '',
@@ -18,18 +18,8 @@ function Branches() {
 
   const apiUrl = "https://selectmaidbackendhost.vercel.app";
 
-  useEffect(() => {
-    const fetchBranches = async () => {
-      try {
-        const response = await axios.get(`${apiUrl}/branch/get-all-branches`); // Replace with your actual API endpoint
-        setBranches(response.data);
-      } catch (error) {
-        setError('Error fetching data');
-      }
-    };
+  const branches = useSelector((state) => state.branch.branch);
 
-    fetchBranches();
-  }, []);
 
   const handleDelete = async (id) => {
     try {

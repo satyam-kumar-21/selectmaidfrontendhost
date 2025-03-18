@@ -1,26 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import UpdateCard from './UpdateCard'; // Adjust the import path based on your project structure
+import { useSelector } from 'react-redux';
 
 const NewUpdates = () => {
-  const [updates, setUpdates] = useState([]);
-  const apiUrl = "https://selectmaidbackendhost.vercel.app"
+ 
 
-  useEffect(() => {
-    const fetchUpdates = async () => {
-      try {
-        const response = await axios.get(`${apiUrl}/new-update/get-all-new-updates`); // Replace with your backend route
-        if (!response.data) {
-          throw new Error('Failed to fetch updates');
-        }
-        setUpdates(response.data);
-      } catch (error) {
-        console.error('Error fetching updates:', error);
-      }
-    };
-
-    fetchUpdates();
-  }, []);
+  const updates = useSelector((state) => state.newupdate.newUpdates); 
 
   return (
     <section id='new-update' className="bg-gray-100 dark:bg-gray-800 py-16">

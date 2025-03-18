@@ -1,26 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import GalleryCard from './GalleryCard'; // Adjust the import path based on your project structure
+import { useSelector } from 'react-redux';
 
 const Gallery = () => {
-  const [galleryItems, setGalleryItems] = useState([]);
-  const apiUrl = "https://selectmaidbackendhost.vercel.app"
+  
 
-  useEffect(() => {
-    const fetchGalleryItems = async () => {
-      try {
-        const response = await axios.get(`${apiUrl}/gallery/all-galleries`); // Replace with your backend route
-        if (!response.data) {
-          throw new Error('Failed to fetch gallery items');
-        }
-        setGalleryItems(response.data);
-      } catch (error) {
-        console.error('Error fetching gallery items:', error);
-      }
-    };
-
-    fetchGalleryItems();
-  }, []);
+  const galleryItems = useSelector((state) => state.gallery.galleries); 
 
   return (
     <section id='gallery' className="bg-gray-100 dark:bg-gray-800 py-16">

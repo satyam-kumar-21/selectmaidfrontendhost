@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AdminSidebar from './AdminSidebar';
+import { useSelector } from 'react-redux';
 
 function Review() {
-  const [ratings, setRatings] = useState([]);
   const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     name: '',
@@ -17,18 +17,8 @@ function Review() {
 
   const apiUrl = "https://selectmaidbackendhost.vercel.app";
 
-  useEffect(() => {
-    const fetchRatings = async () => {
-      try {
-        const response = await axios.get(`${apiUrl}/rating/get-all-ratings`);
-        setRatings(response.data);
-      } catch (error) {
-        setError('Error fetching data: ' + error.message);
-      }
-    };
+  const ratings = useSelector((state) => state.rating.ratings); 
 
-    fetchRatings();
-  }, []);
 
   const handleDelete = async (id) => {
     try {

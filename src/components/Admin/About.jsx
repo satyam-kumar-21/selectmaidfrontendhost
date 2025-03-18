@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AdminSidebar from './AdminSidebar';
+import { useSelector } from 'react-redux';
 
 function About() {
-  const [aboutData, setAboutData] = useState(null);
   const [error, setError] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
@@ -14,18 +14,8 @@ function About() {
 
  const apiUrl = "https://selectmaidbackendhost.vercel.app"
 
-  useEffect(() => {
-    const fetchAboutData = async () => {
-      try {
-        const response = await axios.get(`${apiUrl}/about/get-about`);
-        setAboutData(response.data);
-      } catch (error) {
-        setError('Error fetching data');
-      }
-    };
+ const aboutData = useSelector((state) => state.about.about);  // Adjust the path based on your store structure
 
-    fetchAboutData();
-  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AdminSidebar from './AdminSidebar';
+import { useSelector } from 'react-redux';
 
 function NewUpdates() {
-  const [newUpdates, setNewUpdates] = useState([]);
   const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     heading: '',
@@ -16,18 +16,8 @@ function NewUpdates() {
 
   const apiUrl = "https://selectmaidbackendhost.vercel.app";
 
-  useEffect(() => {
-    const fetchNewUpdates = async () => {
-      try {
-        const response = await axios.get(`${apiUrl}/new-update/get-all-new-updates`); // Replace with your actual API endpoint
-        setNewUpdates(response.data);
-      } catch (error) {
-        setError('Error fetching data');
-      }
-    };
+  const newUpdates = useSelector((state) => state.newupdate.newUpdates); 
 
-    fetchNewUpdates();
-  }, []);
 
   const handleDelete = async (id) => {
     try {
